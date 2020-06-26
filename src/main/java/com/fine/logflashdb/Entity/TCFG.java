@@ -8,6 +8,8 @@ public class TCFG {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @Column(columnDefinition = "LONGTEXT")
     private String TCFG_json;
 
     public TCFG() {
