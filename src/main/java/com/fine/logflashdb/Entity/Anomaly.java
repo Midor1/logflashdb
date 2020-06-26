@@ -9,28 +9,43 @@ import javax.persistence.*;
 public class Anomaly {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(columnDefinition = "INT(11)")
     private int id;
+    @Column(columnDefinition = "VARCHAR(100)")
     private String time;
     @JsonProperty("unix_time")
+    @Column(columnDefinition = "VARCHAR(15)")
     private String unixtime;
+    @Column(columnDefinition = "VARCHAR(20)")
     private String level;
+    @Column(columnDefinition = "VARCHAR(500)")
     private String component;
+    @Column(columnDefinition = "TEXT")
     private String content;
+    @Column(columnDefinition = "TEXT")
     private String template;
     @JsonProperty("param_list")
+    @Column(columnDefinition = "TEXT")
     private String paramlist;
     @JsonProperty("event_id")
+    @Column(columnDefinition = "VARCHAR(200)")
     private String eventid;
     @JsonProperty("anomaly_logs")
+    @Column(columnDefinition = "TEXT")
     private String anomalylogs;
     @JsonProperty("anomaly_request")
+    @Column(columnDefinition = "TEXT")
     private String anomalyrequest;
     @JsonProperty("anomaly_window")
+    @Column(columnDefinition = "VARCHAR(200)")
     private String anomalywindow;
     @JsonProperty("anomaly_type")
+    @Column(columnDefinition = "VARCHAR(10)")
     private String anomalytype;
     @JsonProperty("anomaly_templates")
+    @Column(columnDefinition = "VARCHAR(500)")
     private String anomalytemplates;
+    @Column(columnDefinition = "TEXT")
     private String logsequence_json;
 
     public Anomaly() {
