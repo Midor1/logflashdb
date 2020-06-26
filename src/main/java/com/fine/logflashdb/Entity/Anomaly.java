@@ -1,5 +1,7 @@
 package com.fine.logflashdb.Entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,17 +11,25 @@ public class Anomaly {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String time;
+    @JsonProperty("unix_time")
     private String unixtime;
     private String level;
     private String component;
     private String content;
     private String template;
+    @JsonProperty("param_list")
     private String paramlist;
+    @JsonProperty("event_id")
     private String eventid;
+    @JsonProperty("anomaly_logs")
     private String anomalylogs;
+    @JsonProperty("anomaly_request")
     private String anomalyrequest;
+    @JsonProperty("anomaly_window")
     private String anomalywindow;
+    @JsonProperty("anomaly_type")
     private String anomalytype;
+    @JsonProperty("anomaly_templates")
     private String anomalytemplates;
     private String logsequence_json;
 
