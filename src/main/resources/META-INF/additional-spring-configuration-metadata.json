@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "logflash.url",
+      "type": "java.lang.String",
+      "description": "Description for logflash.url."
+    }
+  ]
+}
