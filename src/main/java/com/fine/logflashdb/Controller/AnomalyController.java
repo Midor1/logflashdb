@@ -3,10 +3,13 @@ package com.fine.logflashdb.Controller;
 import com.fine.logflashdb.Entity.Anomaly;
 import com.fine.logflashdb.Repository.AnomalyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,13 +17,20 @@ import javax.persistence.PersistenceContext;
 @RestController
 @RequestMapping("/Anomaly")
 public class AnomalyController {
+
     private final AnomalyRepository anomalyRepository;
+    private final RestTemplate restTemplate;
+
+    @Value("${logflash.url}")
+    private String url;
+
     @PersistenceContext
     private EntityManager entityManager;
 
     @Autowired
-    public AnomalyController(AnomalyRepository anomalyRepository) {
+    public AnomalyController(RestTemplateBuilder restTemplateBuilder, AnomalyRepository anomalyRepository) {
         this.anomalyRepository = anomalyRepository;
+        restTemplate = restTemplateBuilder.build();
     }
 
     @GetMapping("/")
@@ -34,4 +44,10 @@ public class AnomalyController {
     public Anomaly getAnomalyByID(@PathVariable int id) {
         return anomalyRepository.findAnomalyById(id);
     }
+
+    @PostMapping("/{id}/")
+    public String postAnomalyID(@PathVariable int id) {
+        return restTemplate.postForObject(this.url + "/Anomaly/" + id, null, String.class);
+    }
+
 }
