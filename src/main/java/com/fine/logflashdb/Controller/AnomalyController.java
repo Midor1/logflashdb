@@ -47,6 +47,9 @@ public class AnomalyController {
 
     @PostMapping("/{id}/")
     public String postAnomalyID(@PathVariable int id) {
+        Anomaly posted = anomalyRepository.findAnomalyById(id);
+        posted.setTagged(true);
+        anomalyRepository.save(posted);
         return restTemplate.postForObject(this.url + "/Anomaly/" + id, null, String.class);
     }
 

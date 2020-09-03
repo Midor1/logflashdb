@@ -11,11 +11,18 @@ public class Anomaly {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(columnDefinition = "INT(11)")
     private int id;
+    @JsonProperty("time_start")
     @Column(columnDefinition = "VARCHAR(100)")
-    private String time;
-    @JsonProperty("unix_time")
+    private String timestart;
+    @JsonProperty("time_start")
+    @Column(columnDefinition = "VARCHAR(100)")
+    private String timeend;
+    @JsonProperty("unix_time_start")
     @Column(columnDefinition = "VARCHAR(15)")
-    private String unixtime;
+    private String unixtimestart;
+    @JsonProperty("unix_time_end")
+    @Column(columnDefinition = "VARCHAR(15)")
+    private String unixtimeend;
     @Column(columnDefinition = "VARCHAR(20)")
     private String level;
     @Column(columnDefinition = "VARCHAR(500)")
@@ -47,25 +54,11 @@ public class Anomaly {
     private String anomalytemplates;
     @Column(columnDefinition = "TEXT")
     private String logsequence_json;
+    @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean tagged;
 
     public Anomaly() {
-    }
 
-    public Anomaly(String time, String unixtime, String level, String component, String content, String template, String paramlist, String eventid, String anomalylogs, String anomalyrequest, String anomalywindow, String anomalytype, String anomalytemplates, String logsequence_json) {
-        this.time = time;
-        this.unixtime = unixtime;
-        this.level = level;
-        this.component = component;
-        this.content = content;
-        this.template = template;
-        this.paramlist = paramlist;
-        this.eventid = eventid;
-        this.anomalylogs = anomalylogs;
-        this.anomalyrequest = anomalyrequest;
-        this.anomalywindow = anomalywindow;
-        this.anomalytype = anomalytype;
-        this.anomalytemplates = anomalytemplates;
-        this.logsequence_json = logsequence_json;
     }
 
     public int getId() {
@@ -76,20 +69,36 @@ public class Anomaly {
         this.id = id;
     }
 
-    public String getTime() {
-        return time;
+    public String getTimestart() {
+        return timestart;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setTimestart(String timestart) {
+        this.timestart = timestart;
     }
 
-    public String getUnixtime() {
-        return unixtime;
+    public String getTimeend() {
+        return timeend;
     }
 
-    public void setUnixtime(String unixtime) {
-        this.unixtime = unixtime;
+    public void setTimeend(String timeend) {
+        this.timeend = timeend;
+    }
+
+    public String getUnixtimestart() {
+        return unixtimestart;
+    }
+
+    public void setUnixtimestart(String unixtimestart) {
+        this.unixtimestart = unixtimestart;
+    }
+
+    public String getUnixtimeend() {
+        return unixtimeend;
+    }
+
+    public void setUnixtimeend(String unixtimeend) {
+        this.unixtimeend = unixtimeend;
     }
 
     public String getLevel() {
@@ -186,5 +195,13 @@ public class Anomaly {
 
     public void setLogsequence_json(String logsequence_json) {
         this.logsequence_json = logsequence_json;
+    }
+
+    public boolean isTagged() {
+        return tagged;
+    }
+
+    public void setTagged(boolean tagged) {
+        this.tagged = tagged;
     }
 }
