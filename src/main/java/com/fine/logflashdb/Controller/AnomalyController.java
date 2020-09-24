@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @RestController
 @RequestMapping("/Anomaly")
@@ -43,6 +44,16 @@ public class AnomalyController {
     @GetMapping("/{id}/")
     public Anomaly getAnomalyByID(@PathVariable int id) {
         return anomalyRepository.findAnomalyById(id);
+    }
+
+    @PostMapping("/")
+    public String postAnomalyIDs(@RequestBody List<Integer> IDs) {
+        for (int id: IDs) {
+            Anomaly posted = anomalyRepository.findAnomalyById(id);
+            posted.setTagged(true);
+            anomalyRepository.save(posted);
+        }
+        return restTemplate.postForObject(this.url + "/Anomaly", IDs, String.class);
     }
 
     @PostMapping("/{id}/")
